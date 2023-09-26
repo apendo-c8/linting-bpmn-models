@@ -109,6 +109,7 @@ async function validateBpmnFiles(bpmnFilesPath) {
                     console.log(`${textRed}Errors found in: ${file}:`);
                     console.log(lintResult.stdout);
                     console.log(colorReset);
+                    (0, core_1.setFailed)("Errors found in BPMN file(s).");
                 }
             }
         }

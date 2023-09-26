@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import {getInput, setFailed} from "@actions/core";
+import {error, getInput, setFailed} from "@actions/core";
 import {readdirSync} from "fs";
 import {spawnSync} from "child_process";
 
@@ -99,6 +99,7 @@ async function validateBpmnFiles(bpmnFilesPath: string) {
                     console.log(`${textRed}Errors found in: ${file}:`);
                     console.log(lintResult.stdout);
                     console.log(colorReset);
+                    setFailed("Errors found in BPMN file(s).");
                 }
 
             }
