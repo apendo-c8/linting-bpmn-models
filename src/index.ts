@@ -61,6 +61,9 @@ async function listAvailableRules() {
 async function createBpmnlintrcFile(bpmnlintrcPath: string) {
 
     try {
+        console.log("CREATING .bpmnlintrc file...");
+        console.log(`bpmnlintrcPath: ${bpmnlintrcPath}`);
+
         const bpmnlintrcContent = fs.readFileSync(bpmnlintrcPath, 'utf-8');
         const bpmnlintrcFile = path.join(process.cwd(), '.bpmnlintrc');
         fs.writeFileSync(bpmnlintrcFile, bpmnlintrcContent);
