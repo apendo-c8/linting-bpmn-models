@@ -10,8 +10,8 @@ You can simply refer to this GitHub action in any GitHub workflow.
          - name: Linting BPMN models
            uses: apendo-c8/validate-bpmn-models@v1
            with:
-              bpmn-files-path: '<path-to-process-models-folder>'
-              custom-rules-folder: '<path-to-custom-rules-folder>'
+              source: 'Location of BPMN models'
+              custom-rules-folder: 'Location of custom rules'
 ```
 
 If you wish to run the workflow without any custom rules simply omit `custom-rules-folder:` 
