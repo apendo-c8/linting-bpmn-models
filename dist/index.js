@@ -37,7 +37,6 @@ const fs_1 = __nccwpck_require__(147);
 const child_process_1 = __nccwpck_require__(81);
 const CUSTOM_RULES_PATH = '/usr/local/lib/node_modules/bpmnlint/rules';
 async function installBpmnlint() {
-    var _a;
     try {
         console.log("Installing bpmnlint...");
         const npmCommand = 'npm';
@@ -48,11 +47,10 @@ async function installBpmnlint() {
         }
     }
     catch (error) {
-        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+        (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
 async function copyCustomRules(customRules) {
-    var _a;
     try {
         const textBlue = "\x1b[34m";
         const customRulesFiles = fs.readdirSync(customRules, 'utf-8');
@@ -65,33 +63,30 @@ async function copyCustomRules(customRules) {
         }
     }
     catch (error) {
-        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+        (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
 async function listAvailableRules() {
-    var _a;
     try {
         const availableRules = fs.readdirSync(CUSTOM_RULES_PATH);
         console.log();
         console.log(`Currently implemented rules:`, availableRules);
     }
     catch (error) {
-        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+        (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
 async function createBpmnlintrcFile(bpmnlintrcPath) {
-    var _a;
     try {
         const bpmnlintrcContent = fs.readFileSync(bpmnlintrcPath, 'utf-8');
         const bpmnlintrcFile = path.join(process.cwd(), '.bpmnlintrc');
         fs.writeFileSync(bpmnlintrcFile, bpmnlintrcContent);
     }
     catch (error) {
-        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+        (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
 async function validateBpmnFiles(bpmnFilesPath) {
-    var _a;
     try {
         const colorReset = "\x1b[0m";
         const textRed = "\x1b[31m";
@@ -117,14 +112,13 @@ async function validateBpmnFiles(bpmnFilesPath) {
         }
     }
     catch (error) {
-        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+        (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
 async function runBpmnValidationWorkflow() {
-    var _a;
     try {
         const customRules = (0, core_1.getInput)('custom-rules-folder');
-        const bpmnFiles = (0, core_1.getInput)('bpmn-files-path');
+        const bpmnFiles = (0, core_1.getInput)('source');
         const bpmnlintrcPath = bpmnFiles + '/.bpmnlintrc';
         if (!bpmnFiles) {
             new Error("BPMN files path is required.");
@@ -141,7 +135,7 @@ async function runBpmnValidationWorkflow() {
         await validateBpmnFiles(bpmnFiles);
     }
     catch (error) {
-        (0, core_1.setFailed)((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+        (0, core_1.setFailed)(error?.message ?? "Unknown error");
     }
 }
 runBpmnValidationWorkflow()

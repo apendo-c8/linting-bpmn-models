@@ -1,19 +1,17 @@
 {
-  "name": "linting-bpmn-action",
+  "name": "inting-bpmn-action",
   "version": "1.0.0",
   "description": "This GitHub Action workflow is designed to streamline the validation process for BPMN files using the bpmn linter provided by [bpmn-io](https://github.com/bpmn-io). It enables you to validate your BPMN files and incorporate user-defined rules.",
   "main": "index.js",
   "scripts": {
     "build": "tsc && ncc build lib/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.5.0",
-    "husky": "^8.0.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {

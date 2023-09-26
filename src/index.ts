@@ -110,7 +110,7 @@ async function validateBpmnFiles(bpmnFilesPath: string) {
 async function runBpmnValidationWorkflow() {
     try {
         const customRules = getInput('custom-rules-folder');
-        const bpmnFiles = getInput('bpmn-files-path');
+        const bpmnFiles = getInput('source');
         const bpmnlintrcPath = bpmnFiles + '/.bpmnlintrc';
 
         if (!bpmnFiles) {
