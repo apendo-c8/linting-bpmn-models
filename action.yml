@@ -1,0 +1,19 @@
+name: "Linting BPMN models"
+description: "GitHub Action for automated linting of BPMN models"
+author: "Kristoffer Högberg"
+
+inputs:
+  source:
+    description: 'Location of your BPMN models.'
+    required: true
+  custom-rules-folder:
+    description: 'Location of your custom bpmnlint rules.'
+    required: false
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
+
+branding:
+  icon: 'activity'
+  color: 'green'
