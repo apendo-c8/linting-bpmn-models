@@ -8,7 +8,7 @@ You can simply refer to this GitHub action in any GitHub workflow.
 
 ```yaml
          - name: Linting BPMN models
-           uses: apendo-c8/validate-bpmn-models@v1
+           uses: apendo-c8/linting-bpmn-models@v1
            with:
               source: 'Location of BPMN models'
               custom-rules-folder: 'Location of custom rules'
