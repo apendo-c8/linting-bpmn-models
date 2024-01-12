@@ -3,7 +3,7 @@ description: "GitHub Action for automated linting of BPMN models"
 author: "Kristoffer Högberg"
 
 inputs:
-  source:
+  bpmn_models_source:
     description: 'Location of your BPMN models.'
     required: true
   custom-rules-folder:

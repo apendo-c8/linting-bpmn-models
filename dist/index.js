@@ -121,7 +121,7 @@ async function validateBpmnFiles(bpmnFilesPath) {
 async function runBpmnValidationWorkflow() {
     try {
         const customRules = (0, core_1.getInput)('custom-rules-folder');
-        const bpmnFiles = (0, core_1.getInput)('source');
+        const bpmnFiles = (0, core_1.getInput)('bpmn_models_source');
         const bpmnlintrcPath = bpmnFiles + '/.bpmnlintrc';
         if (!bpmnFiles) {
             new Error("BPMN files path is required.");
