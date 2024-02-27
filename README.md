@@ -11,7 +11,7 @@ You can simply refer to this GitHub action in any GitHub workflow.
            uses: apendo-c8/linting-bpmn-models@v1.4
            with:
               bpmn_models_source: 'Location of BPMN models'
-              custom-rules-folder: 'Location of custom rules'
+              custom_rules_source: 'Location of custom rules'
 ```
 
 If you wish to run the workflow without any custom rules simply omit `custom-rules-folder:` 
