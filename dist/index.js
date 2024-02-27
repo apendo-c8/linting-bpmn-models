@@ -35,7 +35,7 @@ const path = __importStar(__nccwpck_require__(17));
 const core_1 = __nccwpck_require__(186);
 const fs_1 = __nccwpck_require__(147);
 const child_process_1 = __nccwpck_require__(81);
-const CUSTOM_RULES_PATH = '/usr/local/lib/node_modules/bpmnlint/rules';
+const BPMN_LINT_RULES_PATH = '/usr/local/lib/node_modules/bpmnlint/rules';
 async function installBpmnlint() {
     try {
         console.log("Installing bpmnlint...");
@@ -52,12 +52,18 @@ async function installBpmnlint() {
 }
 async function copyCustomRules(customRules) {
     try {
+        if (!fs.existsSync(customRules)) {
+            throw new Error(`The path '${customRules}' does not exist.`);
+        }
+        else if (!fs.lstatSync(customRules).isDirectory()) {
+            throw new Error(`The path '${customRules}' is not a directory.`);
+        }
         const textBlue = "\x1b[34m";
         const customRulesFiles = fs.readdirSync(customRules, 'utf-8');
-        console.log(`${textBlue}Copying custom rules to ${CUSTOM_RULES_PATH}`);
+        console.log(`${textBlue}Copying custom rules to ${BPMN_LINT_RULES_PATH}`);
         for (const file of customRulesFiles) {
             const sourceFilePath = path.join(customRules, file);
-            const targetFilePath = path.join(CUSTOM_RULES_PATH, file);
+            const targetFilePath = path.join(BPMN_LINT_RULES_PATH, file);
             fs.copyFileSync(sourceFilePath, targetFilePath);
             console.log(`${textBlue}Copied: ${file}`);
         }
@@ -68,7 +74,7 @@ async function copyCustomRules(customRules) {
 }
 async function listAvailableRules() {
     try {
-        const availableRules = fs.readdirSync(CUSTOM_RULES_PATH);
+        const availableRules = fs.readdirSync(BPMN_LINT_RULES_PATH);
         console.log();
         console.log(`Currently implemented rules:`, availableRules);
     }
