@@ -6,7 +6,7 @@ inputs:
   bpmn_models_source:
     description: 'Location of your BPMN models.'
     required: true
-  custom-rules-folder:
+  custom_rules_source:
     description: 'Location of your custom bpmnlint rules.'
     required: false
 
