@@ -4,7 +4,7 @@ import {error, getInput, setFailed} from "@actions/core";
 import {readdirSync} from "fs";
 import {spawnSync} from "child_process";
 
-const CUSTOM_RULES_PATH = '/usr/local/lib/node_modules/bpmnlint/rules';
+const BPMN_LINT_RULES_PATH = '/usr/local/lib/node_modules/bpmnlint/rules';
 
 async function installBpmnlint() {
 
@@ -29,13 +29,23 @@ async function installBpmnlint() {
 async function copyCustomRules(customRules: string) {
 
     try {
+
+        if (!fs.existsSync(customRules)) {
+
+            throw new Error(`The path '${customRules}' does not exist.`);
+
+        } else if (!fs.lstatSync(customRules).isDirectory()) {
+
+            throw new Error(`The path '${customRules}' is not a directory.`);
+        }
+
         const textBlue = "\x1b[34m";
         const customRulesFiles = fs.readdirSync(customRules, 'utf-8');
-        console.log(`${textBlue}Copying custom rules to ${CUSTOM_RULES_PATH}`);
+        console.log(`${textBlue}Copying custom rules to ${BPMN_LINT_RULES_PATH}`);
 
         for (const file of customRulesFiles) {
             const sourceFilePath = path.join(customRules, file);
-            const targetFilePath = path.join(CUSTOM_RULES_PATH, file);
+            const targetFilePath = path.join(BPMN_LINT_RULES_PATH, file);
             fs.copyFileSync(sourceFilePath, targetFilePath);
             console.log(`${textBlue}Copied: ${file}`);
         }
@@ -49,7 +59,7 @@ async function copyCustomRules(customRules: string) {
 async function listAvailableRules() {
 
     try {
-        const availableRules = fs.readdirSync(CUSTOM_RULES_PATH);
+        const availableRules = fs.readdirSync(BPMN_LINT_RULES_PATH);
         console.log()
         console.log(`Currently implemented rules:`, availableRules);
     } catch (error) {
