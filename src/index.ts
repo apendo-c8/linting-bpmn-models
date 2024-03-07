@@ -63,7 +63,6 @@ async function copyCustomRules(customRules: string) {
 }
 
 async function listAvailableRules() {
-
     try {
 
         if (!fs.existsSync(BPMN_LINT_RULES_PATH)) {
