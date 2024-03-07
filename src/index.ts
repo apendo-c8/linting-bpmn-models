@@ -65,6 +65,11 @@ async function copyCustomRules(customRules: string) {
 async function listAvailableRules() {
 
     try {
+
+        if (!fs.existsSync(BPMN_LINT_RULES_PATH)) {
+            console.log(`The path '${BPMN_LINT_RULES_PATH}' does not exist.`);
+        }
+
         const availableRules = fs.readdirSync(BPMN_LINT_RULES_PATH);
         console.log()
         console.log(`Currently implemented rules:`, availableRules);
