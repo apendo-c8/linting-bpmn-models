@@ -58,6 +58,11 @@ async function copyCustomRules(customRules) {
         else if (!fs.lstatSync(customRules).isDirectory()) {
             throw new Error(`The path '${customRules}' is not a directory.`);
         }
+        // Ensure the BPMN_LINT_RULES_PATH directory exists before copying
+        if (!fs.existsSync(BPMN_LINT_RULES_PATH)) {
+            console.log(`The path '${BPMN_LINT_RULES_PATH}' does not exist. Creating directory...`);
+            fs.mkdirSync(BPMN_LINT_RULES_PATH, { recursive: true });
+        }
         const textBlue = "\x1b[34m";
         const customRulesFiles = fs.readdirSync(customRules, 'utf-8');
         console.log(`${textBlue}Copying custom rules to ${BPMN_LINT_RULES_PATH}`);
